@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  *
@@ -32,6 +33,22 @@ public interface MoviesServiceAPI {
     @FormUrlEncoded
     @GET("/3/movie/top_rated")
     Call<ResponseAPI>   getTopRatedMovies(@Field("api_key") String api_key);
+
+    /**
+     * Method to get the videos related to an specific movie
+     * @param id
+     * @param api_key
+     * @return
+     */
+    @FormUrlEncoded
+    @GET("/movie/{id}/videos")
+    Call<ResponseAPI> getMovieVideos(@Path("id") String id,@Field("api_key") String api_key);
+
+    @FormUrlEncoded
+    @GET("/movie/{id}/reviews")
+    Call<ResponseAPI> getReviewMovie(@Path("id") String id, @Field("api_key") String api_key);
+
+
 
 
 }
