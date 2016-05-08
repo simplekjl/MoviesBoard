@@ -23,25 +23,23 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-        <fragment
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:name="devdreamers.dev.moviesboard.Fragments.MovieDetailsFragment"
-            android:id="@+id/moviesFeed"
-            tools:layout="@layout/content_details"/>
 
         <fragment
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:name="devdreamers.dev.moviesboard.Fragments.MoviesFeedFragment"
-            android:id="@+id/movieDetails"
-            tools:layout="@layout/content_feed" />
+            android:id="@+id/moviesFeed"/>
 
+        <fragment
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:name="devdreamers.dev.moviesboard.Fragments.MovieDetailsFragment"
+            android:id="@+id/movieDetails"/>
 
 
     </LinearLayout>
