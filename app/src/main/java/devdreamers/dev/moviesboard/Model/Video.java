@@ -78,4 +78,18 @@ public class Video {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "id='" + id + '\'' +
+                ", iso_639_1='" + iso_639_1 + '\'' +
+                ", iso_3166_1='" + iso_3166_1 + '\'' +
+                ", key='" + key + '\'' +
+                ", name='" + name + '\'' +
+                ", site='" + site + '\'' +
+                ", size='" + size + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

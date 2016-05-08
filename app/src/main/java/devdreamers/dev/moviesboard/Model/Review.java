@@ -43,4 +43,14 @@ public class Review {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id='" + id + '\'' +
+                ", author='" + author + '\'' +
+                ", content='" + content + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

@@ -27,13 +27,9 @@ public class MoviesService {
         service = retrofit.create(MoviesServiceAPI.class);
     }
 
-    public Retrofit getRetrofit() {
+    public MoviesServiceAPI getRetrofit() {
 
-        if (retrofit != null)
-        {
-            return retrofit;
-        }else
-            return retrofit;
+        return service;
     }
 
 

@@ -1,9 +1,7 @@
 package devdreamers.dev.moviesboard.Model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * API response
@@ -12,85 +10,26 @@ import java.util.Map;
 
 public class ResponseAPI {
     private Integer page;
-    private List<Movie> Movies = new ArrayList<Movie>();
-    private List<Video> mVideos = new ArrayList<Video>();
-    private List<Review> mReviews = new ArrayList<Review>();
+    private List<Object> results = new ArrayList<Object>();
     private Integer total_movies;
     private Integer total_pages;
     private Integer total_results;
 
-
-    public List<Review> getmReviews() {
-        return mReviews;
-    }
-
-    public void setmReviews(List<Review> mReviews) {
-        this.mReviews = mReviews;
-    }
-
-    public List<Video> getmVideos() {
-        return mVideos;
-    }
-
-    public void setmVideos(List<Video> mVideos) {
-        this.mVideos = mVideos;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     *
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    private Integer id;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    /**
-     *
-     * @return
-     * The page
-     */
     public Integer getPage() {
         return page;
     }
 
-    /**
-     *
-     * @param page
-     * The page
-     */
     public void setPage(Integer page) {
         this.page = page;
     }
 
-    /**
-     *
-     * @return
-     * The Movies
-     */
-    public List<Movie> getMovies() {
-        return Movies;
+    public List<Object> getResults() {
+        return results;
     }
 
-    /**
-     *
-     * @param Movies
-     * The Movies
-     */
-    public void setMovies(List<Movie> Movies) {
-        this.Movies = Movies;
+    public void setResults(List<Object> results) {
+        this.results = results;
     }
-
 
     public Integer getTotal_movies() {
         return total_movies;
@@ -116,12 +55,14 @@ public class ResponseAPI {
         this.total_results = total_results;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return "ResponseAPI{" +
+                "page=" + page +
+                ", total_movies=" + total_movies +
+                ", total_pages=" + total_pages +
+                ", total_results=" + total_results +
+                '}';
     }
 
 }

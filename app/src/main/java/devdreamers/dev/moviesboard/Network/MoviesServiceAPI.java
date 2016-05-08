@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -21,7 +22,7 @@ public interface MoviesServiceAPI {
      * @return
      */
     @FormUrlEncoded
-    @GET("/3/movie/popular")
+    @POST("/3/movie/popular")
     Call<ResponseAPI>   getPopularMovies(@Field("api_key") String api_key);
 
 
@@ -31,7 +32,7 @@ public interface MoviesServiceAPI {
      * @return
      */
     @FormUrlEncoded
-    @GET("/3/movie/top_rated")
+    @POST("/3/movie/top_rated")
     Call<ResponseAPI>   getTopRatedMovies(@Field("api_key") String api_key);
 
     /**
