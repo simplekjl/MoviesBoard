@@ -13,8 +13,35 @@ import java.util.Map;
 public class ResponseAPI {
     private Integer page;
     private List<Movie> Movies = new ArrayList<Movie>();
+    private List<Video> mVideos = new ArrayList<Video>();
     private Integer totalMovies;
     private Integer totalPages;
+
+    public List<Video> getmVideos() {
+        return mVideos;
+    }
+
+    public void setmVideos(List<Video> mVideos) {
+        this.mVideos = mVideos;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     *
+     * @param id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    private Integer id;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**

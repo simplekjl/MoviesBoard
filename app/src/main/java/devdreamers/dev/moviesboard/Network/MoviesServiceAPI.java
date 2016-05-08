@@ -35,7 +35,7 @@ public interface MoviesServiceAPI {
     Call<ResponseAPI>   getTopRatedMovies(@Field("api_key") String api_key);
 
     /**
-     * Method to get the videos related to an specific movie
+     * Method to get the videos related of an specific movie
      * @param id
      * @param api_key
      * @return
@@ -44,6 +44,13 @@ public interface MoviesServiceAPI {
     @GET("/movie/{id}/videos")
     Call<ResponseAPI> getMovieVideos(@Path("id") String id,@Field("api_key") String api_key);
 
+
+    /**
+     * method to get the reviews of an specific movie
+     * @param id
+     * @param api_key
+     * @return
+     */
     @FormUrlEncoded
     @GET("/movie/{id}/reviews")
     Call<ResponseAPI> getReviewMovie(@Path("id") String id, @Field("api_key") String api_key);
