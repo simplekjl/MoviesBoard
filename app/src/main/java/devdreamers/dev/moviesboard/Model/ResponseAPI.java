@@ -14,8 +14,19 @@ public class ResponseAPI {
     private Integer page;
     private List<Movie> Movies = new ArrayList<Movie>();
     private List<Video> mVideos = new ArrayList<Video>();
-    private Integer totalMovies;
-    private Integer totalPages;
+    private List<Review> mReviews = new ArrayList<Review>();
+    private Integer total_movies;
+    private Integer total_pages;
+    private Integer total_results;
+
+
+    public List<Review> getmReviews() {
+        return mReviews;
+    }
+
+    public void setmReviews(List<Review> mReviews) {
+        this.mReviews = mReviews;
+    }
 
     public List<Video> getmVideos() {
         return mVideos;
@@ -80,40 +91,29 @@ public class ResponseAPI {
         this.Movies = Movies;
     }
 
-    /**
-     *
-     * @return
-     * The totalMovies
-     */
-    public Integer getTotalMovies() {
-        return totalMovies;
+
+    public Integer getTotal_movies() {
+        return total_movies;
     }
 
-    /**
-     *
-     * @param totalMovies
-     * The total_Movies
-     */
-    public void setTotalMovies(Integer totalMovies) {
-        this.totalMovies = totalMovies;
+    public void setTotal_movies(Integer total_movies) {
+        this.total_movies = total_movies;
     }
 
-    /**
-     *
-     * @return
-     * The totalPages
-     */
-    public Integer getTotalPages() {
-        return totalPages;
+    public Integer getTotal_pages() {
+        return total_pages;
     }
 
-    /**
-     *
-     * @param totalPages
-     * The total_pages
-     */
-    public void setTotalPages(Integer totalPages) {
-        this.totalPages = totalPages;
+    public void setTotal_pages(Integer total_pages) {
+        this.total_pages = total_pages;
+    }
+
+    public Integer getTotal_results() {
+        return total_results;
+    }
+
+    public void setTotal_results(Integer total_results) {
+        this.total_results = total_results;
     }
 
     public Map<String, Object> getAdditionalProperties() {
