@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MoviesBoard</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- SERVICE API -->
+    <string name="API_KEY">9db6b330e1488992293c1a8c298b9072</string>
+
+</resources>
