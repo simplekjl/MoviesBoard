@@ -9,7 +9,7 @@ import android.view.View;
 
 import devdreamers.dev.moviesboard.R;
 
-public class MovieDetails extends AppCompatActivity {
+public class MovieDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
