@@ -4,9 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -16,29 +14,35 @@ import java.util.Map;
 public class Movie implements Parcelable{
 
     private String poster_path;
-    private Boolean adult;
+    private String adult;
     private String overview;
     private String release_date;
-    private List<Integer> genre_ids = new ArrayList<Integer>();
-    private Integer id;
+    private List<String> genre_ids = new ArrayList<String>();
+    private String id;
     private String original_title;
     private String original_language;
     private String title;
     private String backdrop_path;
-    private Double popularity;
-    private Integer vote_count;
-    private Boolean video;
-    private Double vote_average;
-    private Map<String, Object> additional_properties = new HashMap<String, Object>();
+    private String popularity;
+    private String vote_count;
+    private String video;
+    private String vote_average;
 
     protected Movie(Parcel in) {
         poster_path = in.readString();
+        adult = in.readString();
         overview = in.readString();
         release_date = in.readString();
+        genre_ids = in.createStringArrayList();
+        id = in.readString();
         original_title = in.readString();
         original_language = in.readString();
         title = in.readString();
         backdrop_path = in.readString();
+        popularity = in.readString();
+        vote_count = in.readString();
+        video = in.readString();
+        vote_average = in.readString();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -53,6 +57,29 @@ public class Movie implements Parcelable{
         }
     };
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(poster_path);
+        dest.writeString(adult);
+        dest.writeString(overview);
+        dest.writeString(release_date);
+        dest.writeStringList(genre_ids);
+        dest.writeString(id);
+        dest.writeString(original_title);
+        dest.writeString(original_language);
+        dest.writeString(title);
+        dest.writeString(backdrop_path);
+        dest.writeString(popularity);
+        dest.writeString(vote_count);
+        dest.writeString(video);
+        dest.writeString(vote_average);
+    }
+
     public String getPoster_path() {
         return poster_path;
     }
@@ -61,11 +88,11 @@ public class Movie implements Parcelable{
         this.poster_path = poster_path;
     }
 
-    public Boolean getAdult() {
+    public String getAdult() {
         return adult;
     }
 
-    public void setAdult(Boolean adult) {
+    public void setAdult(String adult) {
         this.adult = adult;
     }
 
@@ -85,19 +112,19 @@ public class Movie implements Parcelable{
         this.release_date = release_date;
     }
 
-    public List<Integer> getGenre_ids() {
+    public List<String> getGenre_ids() {
         return genre_ids;
     }
 
-    public void setGenre_ids(List<Integer> genre_ids) {
+    public void setGenre_ids(List<String> genre_ids) {
         this.genre_ids = genre_ids;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -133,80 +160,54 @@ public class Movie implements Parcelable{
         this.backdrop_path = backdrop_path;
     }
 
-    public Double getPopularity() {
+    public String getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(Double popularity) {
+    public void setPopularity(String popularity) {
         this.popularity = popularity;
     }
 
-    public Integer getVote_count() {
+    public String getVote_count() {
         return vote_count;
     }
 
-    public void setVote_count(Integer vote_count) {
+    public void setVote_count(String vote_count) {
         this.vote_count = vote_count;
     }
 
-    public Boolean getVideo() {
+    public String getVideo() {
         return video;
     }
 
-    public void setVideo(Boolean video) {
+    public void setVideo(String video) {
         this.video = video;
     }
 
-    public Double getVote_average() {
+    public String getVote_average() {
         return vote_average;
     }
 
-    public void setVote_average(Double vote_average) {
+    public void setVote_average(String vote_average) {
         this.vote_average = vote_average;
-    }
-
-    public Map<String, Object> getAdditional_properties() {
-        return additional_properties;
-    }
-
-    public void setAdditional_properties(Map<String, Object> additional_properties) {
-        this.additional_properties = additional_properties;
     }
 
     @Override
     public String toString() {
         return "Movie{" +
                 "poster_path='" + poster_path + '\'' +
-                ", adult=" + adult +
-                ", overview='" + overview + '\'' +
+                ", adult='" + adult + '\'' +
                 ", release_date='" + release_date + '\'' +
                 ", genre_ids=" + genre_ids +
-                ", id=" + id +
+                ", id='" + id + '\'' +
                 ", original_title='" + original_title + '\'' +
                 ", original_language='" + original_language + '\'' +
                 ", title='" + title + '\'' +
                 ", backdrop_path='" + backdrop_path + '\'' +
-                ", popularity=" + popularity +
-                ", vote_count=" + vote_count +
-                ", video=" + video +
-                ", vote_average=" + vote_average +
-                ", additional_properties=" + additional_properties +
+                ", popularity='" + popularity + '\'' +
+                ", vote_count='" + vote_count + '\'' +
+                ", video='" + video + '\'' +
+                ", vote_average='" + vote_average + '\'' +
                 '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(poster_path);
-        dest.writeString(overview);
-        dest.writeString(release_date);
-        dest.writeString(original_title);
-        dest.writeString(original_language);
-        dest.writeString(title);
-        dest.writeString(backdrop_path);
     }
 }

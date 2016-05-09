@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,14 @@ import android.widget.Toolbar;
 
 import com.squareup.picasso.Picasso;
 
+import devdreamers.dev.moviesboard.Adapters.TrailerAdapter;
 import devdreamers.dev.moviesboard.Model.Movie;
+import devdreamers.dev.moviesboard.Model.ResponseVideosAPI;
+import devdreamers.dev.moviesboard.Network.MoviesService;
 import devdreamers.dev.moviesboard.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Fragment for the details of the movies
@@ -34,6 +41,7 @@ public class MovieDetailsFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager llm;
+    private String LOG_TAG = MovieDetailsFragment.class.getSimpleName();
 
 
     public MovieDetailsFragment() {
@@ -51,6 +59,10 @@ public class MovieDetailsFragment extends Fragment {
         mDuration    = (TextView) rootView.findViewById(R.id.rate);
         mFavoriteBtn = (Button) rootView.findViewById(R.id.favoriteBtn);
         mDescription = (TextView) rootView.findViewById(R.id.description);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        llm = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(llm);
         //mToolbar     = (Toolbar) rootView.findViewById(R.id.toolbar);
 
 
@@ -73,8 +85,28 @@ public class MovieDetailsFragment extends Fragment {
         mYear.setText(movie.getTitle());
         mDuration.setText(movie.getRelease_date());
         mDescription.setText(movie.getOverview());
+        Log.d(LOG_TAG,movie.toString());
 
         //TODO llenar recyclerView
+        //making the call to the api to get the information
+        Call<ResponseVideosAPI> mResponse = new MoviesService().getRetrofit()
+                .getMovieVideos(movie.getId().toString(),getString(R.string.API_KEY));
+        //Log.d(LOG_TAG,movie.toString());
+        mResponse.enqueue(new Callback<ResponseVideosAPI>() {
+            @Override
+            public void onResponse(Call<ResponseVideosAPI> call, Response<ResponseVideosAPI> response) {
+                //Log.d(LOG_TAG,response.message().toString());
+                adapter = new TrailerAdapter(response.body().getResults(),getContext());
+                mRecyclerView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseVideosAPI> call, Throwable t) {
+
+            }
+        });
+
 
     }
 }

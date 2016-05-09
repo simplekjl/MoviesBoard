@@ -1,12 +1,14 @@
 package devdreamers.dev.moviesboard.Network;
 
 import devdreamers.dev.moviesboard.Model.ResponseAPI;
+import devdreamers.dev.moviesboard.Model.ResponseVideosAPI;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  *
@@ -41,9 +43,8 @@ public interface MoviesServiceAPI {
      * @param api_key
      * @return
      */
-    @FormUrlEncoded
-    @GET("/movie/{id}/videos")
-    Call<ResponseAPI> getMovieVideos(@Path("id") String id,@Field("api_key") String api_key);
+    @GET("/3/movie/{id}/videos?")
+    Call<ResponseVideosAPI> getMovieVideos(@Path("id") String id, @Query("api_key") String api_key);
 
 
     /**
@@ -52,7 +53,6 @@ public interface MoviesServiceAPI {
      * @param api_key
      * @return
      */
-    @FormUrlEncoded
     @GET("/movie/{id}/reviews")
     Call<ResponseAPI> getReviewMovie(@Path("id") String id, @Field("api_key") String api_key);
 
