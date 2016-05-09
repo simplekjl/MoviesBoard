@@ -27,7 +27,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
 
 
-        Second Activitpublic ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
         }
     }
