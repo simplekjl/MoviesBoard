@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ResponseAPI {
     private Integer page;
-    private List<Object> results = new ArrayList<Object>();
+    private List<Movie> results = new ArrayList<>();
     private Integer total_movies;
     private Integer total_pages;
     private Integer total_results;
@@ -23,11 +23,11 @@ public class ResponseAPI {
         this.page = page;
     }
 
-    public List<Object> getResults() {
+    public List<Movie> getResults() {
         return results;
     }
 
-    public void setResults(List<Object> results) {
+    public void setResults(List<Movie> results) {
         this.results = results;
     }
 

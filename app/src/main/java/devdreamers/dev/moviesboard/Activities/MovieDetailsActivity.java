@@ -1,12 +1,11 @@
 package devdreamers.dev.moviesboard.Activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
+import devdreamers.dev.moviesboard.Fragments.MovieDetailsFragment;
+import devdreamers.dev.moviesboard.Model.Movie;
 import devdreamers.dev.moviesboard.R;
 
 public class MovieDetailsActivity extends AppCompatActivity {
@@ -18,15 +17,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getting the information from the putextras
+
+        MovieDetailsFragment mDetails = (MovieDetailsFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment);
+        //sending the information of the movie storaged into the extras of the intent from the
+        //fragment Feed
+        Movie mMovie = getIntent().getExtras().getParcelable("movie");
+        mDetails.setup(mMovie);
     }
 
 }

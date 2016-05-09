@@ -6,12 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activities.MainActivity">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
 
 
    <ImageView
@@ -92,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/line1"
         android:layout_marginLeft="@dimen/activity_vertical_margin"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

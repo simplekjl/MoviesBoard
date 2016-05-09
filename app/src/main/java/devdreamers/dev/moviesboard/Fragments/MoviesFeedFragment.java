@@ -4,17 +4,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import devdreamers.dev.moviesboard.Adapters.FeedAdapter;
 import devdreamers.dev.moviesboard.Model.ResponseAPI;
 import devdreamers.dev.moviesboard.Network.MoviesService;
 import devdreamers.dev.moviesboard.R;
@@ -32,7 +33,7 @@ public class MoviesFeedFragment extends Fragment{
     private RecyclerView.Adapter mAdapter;
     private RecyclerView         mRecyclerView;
     private List<ResponseAPI>    mList = new ArrayList<ResponseAPI>();
-    private GridLayoutManager    mGridLayoutManager;
+
     private String LOG_TAG       = MoviesFeedFragment.class.getSimpleName();
 
 
@@ -49,9 +50,10 @@ public class MoviesFeedFragment extends Fragment{
 
         //getting all the views
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-        mGridLayoutManager = new GridLayoutManager(getActivity(),2);
-        mRecyclerView.setLayoutManager(mGridLayoutManager);
+        GridLayoutManager    mGridLayoutManager = new GridLayoutManager(getContext(),2);
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
+
 
 
         //getting the information from the server
@@ -59,11 +61,14 @@ public class MoviesFeedFragment extends Fragment{
         mService.enqueue(new Callback<ResponseAPI>() {
             @Override
             public void onResponse(Call<ResponseAPI> call, Response<ResponseAPI> response) {
-                Log.d(LOG_TAG,response.body().getResults().get(0).toString());
+                //Log.d(LOG_TAG,response.body().getResults().get(0).toString());
+                mAdapter = new FeedAdapter(response.body().getResults(),getContext());
+                mRecyclerView.setAdapter(mAdapter);
             }
 
             @Override
             public void onFailure(Call<ResponseAPI> call, Throwable t) {
+                Toast.makeText(getContext(),getString(R.string.error_retrofit), Toast.LENGTH_SHORT).show();
 
             }
         });

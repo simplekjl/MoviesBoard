@@ -1,5 +1,8 @@
 package devdreamers.dev.moviesboard.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.Map;
  * Model movies
  * Created by jlcs on 5/7/16.
  */
-public class Movie {
+public class Movie implements Parcelable{
 
     private String poster_path;
     private Boolean adult;
@@ -27,6 +30,28 @@ public class Movie {
     private Boolean video;
     private Double vote_average;
     private Map<String, Object> additional_properties = new HashMap<String, Object>();
+
+    protected Movie(Parcel in) {
+        poster_path = in.readString();
+        overview = in.readString();
+        release_date = in.readString();
+        original_title = in.readString();
+        original_language = in.readString();
+        title = in.readString();
+        backdrop_path = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
     public String getPoster_path() {
         return poster_path;
@@ -167,5 +192,21 @@ public class Movie {
                 ", vote_average=" + vote_average +
                 ", additional_properties=" + additional_properties +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(poster_path);
+        dest.writeString(overview);
+        dest.writeString(release_date);
+        dest.writeString(original_title);
+        dest.writeString(original_language);
+        dest.writeString(title);
+        dest.writeString(backdrop_path);
     }
 }
