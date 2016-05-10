@@ -4,13 +4,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -38,8 +38,8 @@ public class MovieDetailsFragment extends Fragment {
     private Button mFavoriteBtn;
     private TextView mDescription;
     private Toolbar  mToolbar;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView mRecyclerView;
+    private TrailerAdapter adapter;
+    private ListView mListView;
     private LinearLayoutManager llm;
     private String LOG_TAG = MovieDetailsFragment.class.getSimpleName();
 
@@ -59,10 +59,7 @@ public class MovieDetailsFragment extends Fragment {
         mDuration    = (TextView) rootView.findViewById(R.id.rate);
         mFavoriteBtn = (Button) rootView.findViewById(R.id.favoriteBtn);
         mDescription = (TextView) rootView.findViewById(R.id.description);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true);
-        llm = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(llm);
+        mListView = (ListView) rootView.findViewById(R.id.listView);
         //mToolbar     = (Toolbar) rootView.findViewById(R.id.toolbar);
 
 
@@ -87,7 +84,7 @@ public class MovieDetailsFragment extends Fragment {
         mDescription.setText(movie.getOverview());
         Log.d(LOG_TAG,movie.toString());
 
-        //TODO llenar recyclerView
+        //TODO llenar ListView
         //making the call to the api to get the information
         Call<ResponseVideosAPI> mResponse = new MoviesService().getRetrofit()
                 .getMovieVideos(movie.getId().toString(),getString(R.string.API_KEY));
@@ -96,8 +93,10 @@ public class MovieDetailsFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseVideosAPI> call, Response<ResponseVideosAPI> response) {
                 //Log.d(LOG_TAG,response.message().toString());
-                adapter = new TrailerAdapter(response.body().getResults(),getContext());
-                mRecyclerView.setAdapter(adapter);
+                int elems= response.body().getResults().size();
+                adapter = new TrailerAdapter(getContext(),R.layout.item_movie,response.body().getResults());
+                mListView.setAdapter(adapter);
+                adapter.setListViewHeightBasedOnItems(mListView);
 
             }
 

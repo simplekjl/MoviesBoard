@@ -1,10 +1,12 @@
 package devdreamers.dev.moviesboard.Adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,49 +17,77 @@ import devdreamers.dev.moviesboard.R;
 /**
  * Created by jlcs on 5/8/16.
  */
-public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.ViewHolder> {
+public class TrailerAdapter extends ArrayAdapter<Video> {
 
     private List<Video> mList;
     private Context context;
+    private TextView mText;
 
-    public TrailerAdapter(List<Video> results, Context context) {
+
+    public TrailerAdapter(Context context, int resource) {
+        super(context,resource);
+
+        this.context = context;
+    }
+
+    public TrailerAdapter(Context context, int resource, List<Video> results) {
+        super(context, resource, results);
         mList = results;
         this.context = context;
     }
 
     @Override
-    public TrailerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_video,parent,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(TrailerAdapter.ViewHolder holder, int position) {
-
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = convertView;
+        if (view == null){
+            LayoutInflater inflater;
+            inflater = LayoutInflater.from(context);
+            view = inflater.inflate(R.layout.item_video,parent,false);
+        }
         Video mVideo = mList.get(position);
-        holder.setup(mVideo);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mList.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        private TextView mText;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            mText = (TextView) itemView.findViewById(R.id.reviewText);
+        if(mVideo != null){
+            mText = (TextView) view.findViewById(R.id.reviewText);
+            mText.setText(mVideo.getName());
 
         }
+        return view;
+    }
+    /**
+     * Sets ListView height dynamically based on the height of the items.
+     *
+     * @param listView to be resized
+     * @return true if the listView is successfully resized, false otherwise
+     */
+    public static boolean setListViewHeightBasedOnItems(ListView listView) {
 
-        public void setup(Video movie) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter != null) {
 
-            mText.setText(movie.getName());
+            int numberOfItems = listAdapter.getCount();
+
+            // Get total height of all items.
+            int totalItemsHeight = 0;
+            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                View item = listAdapter.getView(itemPos, null, listView);
+                item.measure(0, 0);
+                totalItemsHeight += item.getMeasuredHeight();
+            }
+
+            // Get total height of all item dividers.
+            int totalDividersHeight = listView.getDividerHeight() *
+                    (numberOfItems - 1);
+
+            // Set list height.
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalItemsHeight + totalDividersHeight;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+
+            return true;
+
+        } else {
+            return false;
         }
+
     }
 }
